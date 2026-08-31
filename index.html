@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Como Dos — Alquiler de muebles para eventos</title>
+<meta name="description" content="Sillas y mesas de madera clara para eventos al aire libre. Alquiler en Mendoza, con entrega y armado incluido.">
+
+<link rel="icon" type="image/png" href="img/favicon.png" sizes="32x32">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,440;0,9..144,560;1,9..144,440&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --white:#FFFFFF;
+    --paper:#FBF9F6;
+    --wood-light:#D9B98C;
+    --wood-mid:#B8895A;
+    --wood-dark:#6E4A2E;
+    --ink:#2A211A;
+    --ink-soft:#584838;
+    --line:#E7DBC7;
+    --max:1180px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--white);
+    color:var(--ink);
+    font-family:'Sora', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.serif{
+    font-family:'Fraunces', serif;
+    font-weight:440;
+    color:var(--wood-dark);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;}
+
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- Floating nav ---------- */
+  .nav{
+    position:fixed;
+    top:22px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:100;
+    width:min(1200px, calc(100% - 32px));
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 8px;
+    border-radius:25px;
+    background:rgba(255, 255, 255, 0.18);
+    backdrop-filter:blur(9px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    /* border:1px solid rgba(255 , 255, 255, 0.1); */
+    transition:background .4s ease, border-color .4s ease, box-shadow .4s ease, padding .4s ease;
+  }
+  .nav.solid{
+    background:rgba(255,255,255,0.92);
+    border-color:transparent;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+  .nav-logo{
+    font-family:'Fraunces', serif;
+    font-size:1.05rem;
+    font-weight:440;
+    color:var(--white);
+    white-space:nowrap;
+    transition:color .4s ease;
+  }
+  .nav.solid .nav-logo{color:var(--wood-dark);}
+
+  .nav-links{
+    display:flex;
+    gap:28px;
+    align-items:center;
+  }
+  .nav-links a{
+    font-size:0.88rem;
+    color:rgba(255,255,255,0.88);
+    transition:color .4s ease, opacity .2s ease;
+  }
+  .nav.solid .nav-links a{color:var(--ink-soft);}
+  .nav-links a:hover{opacity:0.7;}
+
+  .nav-cta{
+    padding:9px 20px;
+    border-radius:15px;
+    background:transparent;
+    color:var(--white);
+    border:1px solid var(--white);
+    font-size:0.85rem;
+    font-weight:500;
+    white-space:nowrap;
+    transition:background .25s ease, transform .2s ease;
+  }
+  .nav-cta:hover{background:var(--ink-soft); color:var(--white); transform:translateY(-1px);}
+
+  .nav-burger{
+    display:none;
+    width:36px;height:36px;
+    border-radius:50%;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,255,255,0.2);
+  }
+  .nav.solid .nav-burger{background:var(--paper);}
+  .nav-burger span, .nav-burger::before, .nav-burger::after{
+    content:'';
+    position:absolute;
+    width:16px;height:1.5px;
+    background:var(--white);
+  }
+  .nav.solid .nav-burger span,
+  .nav.solid .nav-burger::before,
+  .nav.solid .nav-burger::after{background:var(--wood-dark);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    height:100vh;
+    min-height:640px;
+    width:100%;
+    overflow:hidden;
+    display:flex;
+    align-items:flex-end;
+    color:var(--white);
+  }
+  .hero video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:saturate(1.05);
+  }
+    .hero::after{
+    content:'';
+    position:absolute;
+    backdrop-filter:blur(3px); 
+    inset:0;
+    background:linear-gradient(180deg, rgba(20,13,6,0.7) 0%, rgba(0,0,0,0.6) 50%, rgba(20,13,6,0.7) 100% );
+}
+  
+  .hero-content{
+    position:relative;
+    z-index:2;
+    width:100%;
+    padding-bottom:4%;
+    display: flex;
+    flex-direction: column;
+    max-width:var(--max);
+    margin:0 auto;
+  }
+  .hero-eyebrow{
+    font-size:0.85rem;
+    color:var(--wood-light);
+    margin-bottom:18px !important;
+    max-width:420px;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 6vw, 5rem);
+    color:var(--white);
+    max-width:820px;
+    margin-bottom:22px;
+  }
+  .hero p{
+    font-size:1.05rem;
+    max-width:480px;
+    color:rgba(255,255,255,0.85);
+    margin-bottom:34px;
+  }
+  .hero-actions{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .btn-primary{
+    padding:8px 20px;
+    border-radius:15px;
+    background:var(--wood-light);
+    color:var(--ink);
+    font-weight:500;
+    font-size:0.95rem;
+    transition:background .25s ease, transform .2s ease;
+    display:inline-block;
+  }
+  .btn-primary:hover{background:var(--white); transform:translateY(-2px);}
+  .btn-ghost{
+    padding:8px 20px;
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,0.5);
+    color:var(--white);
+    font-size:0.95rem;
+    transition:border-color .25s ease, background .25s ease;
+  }
+  .btn-ghost:hover{background:rgba(255,255,255,0.12); border-color:rgba(255,255,255,0.9);}
+
+  .hero-scroll{
+    position:absolute;
+    right:32px;
+    bottom:36px;
+    z-index:2;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    color:rgba(255,255,255,0.75);
+    font-size:0.75rem;
+  }
+  .hero-scroll .line{
+    width:1px;height:44px;
+    background:rgba(255,255,255,0.55);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-scroll .line::after{
+    content:'';
+    position:absolute;
+    top:-100%;left:0;
+    width:100%;height:100%;
+    background:var(--wood-light);
+    animation:scrollLine 2.2s ease-in-out infinite;
+  }
+  @keyframes scrollLine{
+    0%{top:-100%;}
+    50%{top:0%;}
+    100%{top:100%;}
+  }
+
+
+  /* ---------- Section basics ---------- */
+  section{
+    padding:110px 0;
+  }
+  .section-tag{
+    font-size:0.85rem;
+    color:var(--wood-mid);
+    margin-bottom:14px;
+  }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:40px;
+    margin-bottom:56px;
+    flex-wrap:wrap;
+  }
+  .section-head h2{
+    font-size:clamp(2rem, 3.4vw, 2.9rem);
+    max-width:560px;
+  }
+  .section-head p{
+    max-width:360px;
+    color:var(--ink-soft);
+    font-size:0.98rem;
+  }
+
+  /* ---------- Intro / about ---------- */
+  .about{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:64px;
+    align-items:center;
+  }
+  .about-img{
+    position:relative;
+    border-radius:6px;
+    overflow:hidden;
+    aspect-ratio:4/5;
+  }
+  .about-img img{width:100%;height:100%;object-fit:cover;}
+  .about-img-tag{
+    position:absolute;
+    left:20px;
+    bottom:20px;
+    background:rgba(255,255,255,0.9);
+    backdrop-filter:blur(6px);
+    padding:10px 16px;
+    border-radius:6px;
+    font-size:0.82rem;
+    color:var(--wood-dark);
+    font-family:'Fraunces', serif;
+  }
+  .about-text h2{
+    font-size:clamp(1.9rem, 3.2vw, 2.5rem);
+    margin-bottom:24px;
+    max-width:460px;
+  }
+  .about-text p{
+    color:var(--ink-soft);
+    max-width:480px;
+    margin-bottom:20px;
+  }
+
+  /* ---------- Stock ---------- */
+  .stock{
+    background:var(--paper);
+  }
+  .stock-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .stock-card{
+    background:var(--white);
+    padding:36px 30px;
+    transition:background .25s ease;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  }
+  .stock-card:hover{background:var(--paper);}
+  .stock-card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:26px;
+  }
+  .stock-card img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:6px;
+    margin-bottom:22px;
+  }
+  .stock-avail{
+    font-size:0.72rem;
+    color:var(--wood-mid);
+    border:1px solid var(--wood-light);
+    padding:4px 10px;
+    border-radius:15px;
+    white-space:nowrap;
+  }
+  .stock-card h3{
+    font-size:1.25rem;
+    margin-bottom:8px;
+  }
+  .stock-card p{
+    color:var(--ink-soft);
+    font-size:0.9rem;
+    margin-bottom:16px;
+  }
+  .stock-meta{
+    display:flex;
+    justify-content:space-between;
+    font-size:0.82rem;
+    color:var(--wood-dark);
+    border-top:1px solid var(--line);
+    padding-top:14px;
+  }
+  .stock-note{
+    margin-top:30px;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+
+  /* ---------- Gallery ---------- */
+  #galeria {
+    background: var(--paper);
+  } 
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    grid-auto-rows:150px;
+    gap:10px;
+  }
+  .gallery-item{
+    position:relative;
+    border-radius:6px;
+    overflow:hidden;
+    cursor:pointer;
+  }
+  .gallery-item img, .gallery-item video{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform .5s ease;
+  }
+  .gallery-item:hover img, .gallery-item:hover video{transform:scale(1.06);}
+  .gallery-item .g-play{
+    position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:46px;height:46px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.88);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .gallery-item .g-play::after{
+    content:'';
+    border-style:solid;
+    border-width:7px 0 7px 11px;
+    border-color:transparent transparent transparent var(--wood-dark);
+    margin-left:3px;
+  }
+  .g-span2{grid-column:span 2; grid-row:span 2;}
+
+  /* Lightbox */
+  .lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(20,14,8,0.92);
+    z-index:200;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:40px;
+  }
+  .lightbox.active{display:flex;}
+  .lightbox-inner{
+    max-width:900px;
+    max-height:85vh;
+    width:100%;
+  }
+  .lightbox-inner img, .lightbox-inner video{
+    width:100%;
+    max-height:85vh;
+    object-fit:contain;
+    border-radius:6px;
+  }
+  .lightbox-close{
+    position:absolute;
+    top:28px; right:32px;
+    width:42px;height:42px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.12);
+    color:var(--white);
+    font-size:1.4rem;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .lightbox-close:hover{background:rgba(255,255,255,0.22);}
+
+  /* ---------- Contact ---------- */
+  .contact{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:70px;
+  }
+  .contact-info h2{
+    font-size:clamp(1.9rem, 3.2vw, 2.5rem);
+    margin-bottom:20px;
+    max-width:400px;
+  }
+  .contact-info p{
+    color:var(--ink-soft);
+    margin-bottom:36px;
+    max-width:400px;
+  }
+  .contact-detail{
+    display:flex;
+    gap:14px;
+    padding:16px 0;
+    border-top:1px solid var(--line);
+  }
+  .contact-detail:last-of-type{border-bottom:1px solid var(--line);}
+  .contact-detail b{
+    display:block;
+    font-family:'Fraunces', serif;
+    color:var(--wood-dark);
+    font-weight:440;
+    margin-bottom:2px;
+  }
+  .contact-detail span{
+    font-size:0.9rem;
+    color:var(--ink-soft);
+  }
+
+  form{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .field.full{grid-column:1/-1;}
+  .field label{
+    font-size:0.82rem;
+    color:var(--ink-soft);
+  }
+  .field input, .field select, .field textarea{
+    font-family:'Sora', sans-serif;
+    font-size:0.95rem;
+    padding:13px 16px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    background:var(--paper);
+    color:var(--ink);
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none;
+    border-color:var(--wood-mid);
+    background:var(--white);
+  }
+  .field textarea{resize:vertical; min-height:100px;}
+  .form-submit{
+    grid-column:1/-1;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-top:6px;
+  }
+  .btn-send{
+    padding:8px 20px;
+    border-radius:15px;
+    background:var(--wood-dark);
+    color:var(--white);
+    font-weight:500;
+    font-size:0.95rem;
+    transition:background .25s ease, transform .2s ease;
+  }
+  .btn-send:hover{background:var(--wood-mid); transform:translateY(-2px);}
+  .form-status{
+    font-size:0.85rem;
+    color:var(--wood-mid);
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--ink);
+    color:rgba(255,255,255,0.82);
+    padding:64px 0 30px;
+  }
+  .footer-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:40px;
+    flex-wrap:wrap;
+    padding-bottom:40px;
+    border-bottom:1px solid rgba(255,255,255,0.14);
+    margin-bottom:26px;
+  }
+  footer .logo{
+    font-family:'Fraunces', serif;
+    font-size:1.5rem;
+    color:var(--white);
+    margin-bottom:10px;
+  }
+  footer .foot-desc{
+    max-width:320px;
+    font-size:0.88rem;
+    color:rgba(255,255,255,0.65);
+  }
+  .foot-links{
+    display:flex;
+    gap:60px;
+    flex-wrap:wrap;
+  }
+  .foot-col b{
+    display:block;
+    color:var(--white);
+    font-size:0.82rem;
+    margin-bottom:14px;
+    font-weight:500;
+  }
+  .foot-col a{
+    display:block;
+    font-size:0.86rem;
+    color:rgba(255,255,255,0.65);
+    margin-bottom:10px;
+  }
+  .foot-col a:hover{color:var(--white);}
+  .foot-bottom{
+    display:flex;
+    justify-content:space-between;
+    font-size:0.78rem;
+    color:rgba(255,255,255,0.5);
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  /* ---------- Reveal on scroll (single orchestrated pattern) ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity .8s ease, transform .8s ease;
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:920px){
+    .about{grid-template-columns:1fr; gap:40px;}
+    .stock-grid{grid-template-columns:repeat(2,1fr);}
+    .contact{grid-template-columns:1fr; gap:50px;}
+    .gallery-grid{grid-template-columns:repeat(3,1fr); grid-auto-rows:130px;}
+    .g-span2{grid-column:span 2; grid-row:span 1;}
+  }
+  @media (max-width:680px){
+    .nav-links{display:none;}
+    .nav-burger{display:flex; position:relative;}
+    .nav-cta{display:none;}
+    section{padding:80px 0;}
+    .stock-grid{grid-template-columns:1fr;}
+    form{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr); grid-auto-rows:150px;}
+    .footer-top{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<nav class="nav" id="nav">
+  <a href="#inicio" class="nav-logo">
+    <img src="img/como dos simple blanco svg.svg" alt="Logo Como Dos Mendoza — Alquiler de muebles para eventos al aire libre" width="180">
+  </a>
+  <div class="nav-links">
+    <a href="#nosotros">Nosotros</a>
+    <!-- <a href="#stock">Stock</a> -->
+    <a href="#galeria">Galería</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <a href="#contacto" class="nav-cta">Contactar </a>
+  <button class="nav-burger" aria-label="Menú"><span></span></button>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="inicio">
+  <video autoplay muted loop playsinline poster="img/img 7.jpeg" src
+  ="img/img 7.jpeg" class="hero-video">
+    <!-- <source src="/videos/a-timelapse-of-a-vinyard-in-mendoza-argentina-cl-2026-01-22-02-34-02-utc.mp4" type="video/mp4"> -->
+    <!-- Reemplazar por un video propio de mesas y sillas armadas en un evento al aire libre -->
+  </video>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Alquiler de sillas y mesas para eventos al aire libre</p>
+    <h1>Vistiendo eventos debajo del cielo mendocino</h1>
+    <p>Muebles de madera clara pensados para bodas, cumpleaños y encuentros a cielo abierto. Entregamos, armamos y retiramos, en toda Mendoza.</p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn-primary">Pedí tu presupuesto</a>
+      <a href="#stock" class="btn-ghost">Ver el stock</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Bajá</span>
+    <div class="line"></div>
+  </div>
+</header>
+
+<!-- ================= NOSOTROS ================= -->
+<section id="nosotros">
+  <div class="wrap about">
+    <div class="about-img reveal">
+      <img src="img/img 12.jpeg" alt="Mesa de madera clara armada para un evento al aire libre">
+      <span class="about-img-tag">Viñedo · San Rafael, 2025</span>
+    </div>
+    <div class="about-text reveal">
+      <!-- <p class="section-tag"></p> -->
+      <h2>Quiénes somos</h2>
+      <p>Como Dos Mendoza nació entre viñedos, para bodas que no querían techo. Elegimos madera clara porque acompaña cualquier paisaje sin taparlo: patios, bodegas, quinchos, orillas de río.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STOCK ================= -->
+ <!--
+<section id="stock" class="stock">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="section-tag">Lo que tenemos disponible</p>
+        <h2>Stock para armar tu evento</h2>
+      </div>
+      <p>Todo en madera clara de pino tratado, resistente a la intemperie. Se puede combinar y retirar por unidad.</p>
+    </div>
+
+    <div class="stock-grid reveal">
+      <div class="stock-card">
+        <img src="https://images.unsplash.com/photo-1592078615290-033ee584e267?q=80&w=800&auto=format&fit=crop" alt="Sillas plegables de madera clara">
+        <div class="stock-card-top">
+          <h3>Silla plegable Mendoza</h3>
+          <span class="stock-avail">Disponible</span>
+        </div>
+        <p>Estructura de pino, asiento respaldo curvo. Se apila para transporte y guardado.</p>
+        <div class="stock-meta">
+          <span>420 unidades</span>
+          <span>45×52×88 cm</span>
+        </div>
+      </div>
+
+      <div class="stock-card">
+        <img src="https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=800&auto=format&fit=crop" alt="Mesa larga de madera para evento al aire libre">
+        <div class="stock-card-top">
+          <h3>Mesa comunal 220</h3>
+          <span class="stock-avail">Disponible</span>
+        </div>
+        <p>Ideal para banquetes largos. Tablero macizo, caballete desmontable.</p>
+        <div class="stock-meta">
+          <span>60 unidades</span>
+          <span>220×90×75 cm</span>
+        </div>
+      </div>
+
+      <div class="stock-card">
+        <img src="https://images.unsplash.com/photo-1519677100203-a0e668c92439?q=80&w=800&auto=format&fit=crop" alt="Mesa redonda de madera para diez personas">
+        <div class="stock-card-top">
+          <h3>Mesa redonda 10</h3>
+          <span class="stock-avail">Stock limitado</span>
+        </div>
+        <p>Para diez comensales. La preferida en bodas por su cercanía en la charla.</p>
+        <div class="stock-meta">
+          <span>38 unidades</span>
+          <span>Ø180×75 cm</span>
+        </div>
+      </div>
+
+      <div class="stock-card">
+        <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?q=80&w=800&auto=format&fit=crop" alt="Banco de madera para eventos">
+        <div class="stock-card-top">
+          <h3>Banco corrido</h3>
+          <span class="stock-avail">Disponible</span>
+        </div>
+        <p>Combina con la mesa comunal. Suma calidez a ceremonias y after.</p>
+        <div class="stock-meta">
+          <span>90 unidades</span>
+          <span>200×32×45 cm</span>
+        </div>
+      </div>
+
+      <div class="stock-card">
+        <img src="https://images.unsplash.com/photo-1517502884422-41eaead166d4?q=80&w=800&auto=format&fit=crop" alt="Sillón individual de madera para eventos">
+        <div class="stock-card-top">
+          <h3>Sillón butaca</h3>
+          <span class="stock-avail">Stock limitado</span>
+        </div>
+        <p>Para la mesa principal o el rincón de fotos. Con almohadón de lino incluido.</p>
+        <div class="stock-meta">
+          <span>18 unidades</span>
+          <span>60×65×92 cm</span>
+        </div>
+      </div>
+
+      <div class="stock-card">
+        <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=800&auto=format&fit=crop" alt="Mesa cuadrada de madera para eventos íntimos">
+        <div class="stock-card-top">
+          <h3>Mesa cuadrada 90</h3>
+          <span class="stock-avail">Disponible</span>
+        </div>
+        <p>Para grupos chicos o mesas dulces. Se arma en isla o en fila.</p>
+        <div class="stock-meta">
+          <span>52 unidades</span>
+          <span>90×90×75 cm</span>
+        </div>
+      </div>
+    </div>
+
+     <p class="stock-note">¿Necesitás otra medida o cantidad? Contanos el evento y armamos la propuesta a medida.</p> 
+  </div>
+</section>
+-->
+
+<!-- ================= GALERÍA ================= -->
+<section id="galeria">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="section-tag">Eventos armados</p>
+        <h2>Cómo se ve la mesa puesta afuera</h2>
+      </div>
+      <p>Fotos y videos reales de bodas, cumpleaños y encuentros que armamos este último año.</p>
+    </div>
+
+    <div class="gallery-grid reveal">
+      <div class="gallery-item g-span2" data-type="image">
+        <img src="img/img 114.jpeg" alt="Mesa larga armada en viñedo">
+      </div>
+      <div class="gallery-item" data-type="image" >
+        <img src="img/img 2.jpeg" alt="Mesa larga armada en viñedo">
+      </div>
+      <div class="gallery-item" data-type="image" >
+        <img src="img/img 4.jpeg" alt="Sillas de madera clara para boda al aire libre">
+      </div>
+      <div class="gallery-item" data-type="image" >
+        <img src="img/img 7.jpeg" alt="Ceremonia al aire libre con sillas de madera">
+      </div>
+      <div class="gallery-item" data-type="image" >
+        <img src="img/img 8.jpeg" alt="Mesa dulce con mantel en evento de campo">
+      </div>
+      <div class="gallery-item g-span2" data-type="image" >
+        <img src="img/img 9.jpeg" alt="Mesas comunales dispuestas para banquete de boda">
+      </div>
+      <div class="gallery-item" data-type="image" >
+        <img src="img/img 10.jpeg" alt="Detalle de silla de madera con flores">
+      </div>
+      <div class="gallery-item" data-type="image" >
+        <img src="img/img 12.jpeg" alt="Detalle de silla de madera con flores">
+      </div>
+        <div class="gallery-item" data-type="image" >
+        <img src="img/img 13.jpeg" alt="Detalle de silla de madera con flores">
+      </div>
+        <div class="gallery-item" data-type="image" >
+        <img src="img/img 15.jpeg" alt="Detalle de silla de madera con flores">
+      </div>
+       
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">×</button>
+  <div class="lightbox-inner" id="lightboxInner"></div>
+</div>
+
+<!-- ================= CONTACTO ================= -->
+<section id="contacto">
+  <div class="wrap contact">
+    <div class="contact-info reveal">
+      <p class="section-tag">Consultanos</p>
+      <h2>Contanos tu evento y te armamos el presupuesto</h2>
+      <div class="contact-detail">
+        <div>
+          <b>WhatsApp</b>
+          <span>+54 9 261 625-5783</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div>
+          <b>Email</b>
+          <span>como2eventos@gmail.com</span>
+        </div>
+      </div>
+    </div>
+
+    <form id="contactForm" class="reveal">
+      <div class="field">
+        <label for="nombre">Nombre y apellido</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+      </div>
+      <div class="field">
+        <label for="telefono">Teléfono</label>
+        <input type="tel" id="telefono" name="telefono" placeholder="Ej: 261-555-0148" required>
+      </div>
+      <div class="field">
+        <label for="fecha">Fecha del evento</label>
+        <input type="date" id="fecha" name="fecha">
+      </div>
+      <div class="field">
+        <label for="invitados">Cantidad de invitados</label>
+        <input type="number" id="invitados" name="invitados" placeholder="Ej: 120" min="1">
+      </div>
+      <div class="field full">
+        <label for="tipo">Tipo de evento</label>
+        <select id="tipo" name="tipo">
+          <option value="boda">Boda</option>
+          <option value="cumpleanos">Cumpleaños</option>
+          <option value="corporativo">Evento corporativo</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label for="mensaje">Contanos más</label>
+        <textarea id="mensaje" name="mensaje" placeholder="Lugar, cantidad de mesas y sillas que estás pensando, horario del evento..."></textarea>
+      </div>
+      <div class="form-submit">
+        <button type="submit" class="btn-send">Enviar consulta</button>
+        <span class="form-status" id="formStatus"></span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <p class="logo">Como Dos Mendoza</p>
+        <p class="foot-desc">Alquiler de sillas y mesas de madera clara para eventos al aire libre en toda Mendoza.</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <b>Navegación</b>
+          <a href="#nosotros">Nosotros</a>
+          <a href="#stock">Stock</a>
+          <a href="#galeria">Galería</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+        <div class="foot-col">
+          <b>Contacto</b>
+          <a href="tel:+5492616255783">+54 9 261 625-5783</a>
+          <a href="mailto:como2eventos@gmail.com">como2eventos@gmail.com</a>
+        </div>
+        <div class="foot-col">
+          <b>Seguinos</b>
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Como Dos Mendoza. Todos los derechos reservados.</span>
+      <span>Hecho a medida, como nuestras mesas.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+    document.querySelector('.hero-video').playbackRate = 0.5;
+  // Nav solid background on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 60){ nav.classList.add('solid'); }
+    else{ nav.classList.remove('solid'); }
+  });
+
+  // Mobile burger -> smooth scroll to contact as simple fallback
+  document.querySelector('.nav-burger').addEventListener('click', () => {
+    document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
+  });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el => io.observe(el));
+
+  // Gallery lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxInner = document.getElementById('lightboxInner');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const type = item.dataset.type;
+      const src = item.dataset.src;
+      lightboxInner.innerHTML = '';
+      if(type === 'video'){
+        const v = document.createElement('video');
+        v.src = src;
+        v.controls = true;
+        v.autoplay = true;
+        v.loop = true;
+        lightboxInner.appendChild(v);
+      } else {
+        const img = document.createElement('img');
+        img.src = src;
+        lightboxInner.appendChild(img);
+      }
+      lightbox.classList.add('active');
+    });
+  });
+
+  function closeLightbox(){
+    lightbox.classList.remove('active');
+    lightboxInner.innerHTML = '';
+  }
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if(e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') closeLightbox();
+  });
+
+  // Contact form (front-end only demo)
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    status.textContent = 'Recibimos tu consulta. Te contactamos a la brevedad.';
+    form.reset();
+    // Para producción: reemplazar por integración con backend, servicio de email o WhatsApp API.
+  });
+</script>
+
+</body>
+</html>
