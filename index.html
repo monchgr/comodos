@@ -15,12 +15,12 @@
   :root{
     --white:#FFFFFF;
     --paper:#FBF9F6;
-    --wood-light:#D9B98C;
-    --wood-mid:#B8895A;
-    --wood-dark:#6E4A2E;
-    --ink:#2A211A;
-    --ink-soft:#584838;
-    --line:#E7DBC7;
+    --wood-light:#5C8541;
+    --wood-mid:#DECF98;
+    --wood-dark:#ab9f74;
+    --ink:#584838;
+    --ink-soft:#372d23;
+    --line:#D9B596;
     --max:1180px;
   }
 
@@ -41,7 +41,7 @@
   h1,h2,h3,.serif{
     font-family:'Fraunces', serif;
     font-weight:440;
-    color:var(--wood-dark);
+    color:var(--ink);
     line-height:1.08;
     letter-spacing:-0.01em;
   }
@@ -62,25 +62,31 @@
   .nav{
     position:fixed;
     top:22px;
-    left:50%;
-    transform:translateX(-50%);
     z-index:100;
-    width:min(1200px, calc(100% - 32px));
+    width:80%;
     display:flex;
     align-items:center;
     justify-content:space-between;
+    justify-self:center;
     padding: 8px;
-    border-radius:25px;
-    background:rgba(255, 255, 255, 0.18);
-    backdrop-filter:blur(9px) saturate(140%);
-    -webkit-backdrop-filter:blur(14px) saturate(140%);
-    /* border:1px solid rgba(255 , 255, 255, 0.1); */
+    border-radius:50px;
+    background:rgba(0, 0, 0, 0.18);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
     transition:background .4s ease, border-color .4s ease, box-shadow .4s ease, padding .4s ease;
   }
   .nav.solid{
-    background:rgba(255,255,255,0.92);
+    background:rgba(255,255,255,0.7);
     border-color:transparent;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+  .nav.solid .nav-cta {
+    background: var(--ink) !important;
+    color: var(--paper) !important;
+  }
+   .nav.solid .nav-cta:hover {
+    background: var(--ink-soft) !important;
+    color: var(--paper) !important;
   }
   .nav-logo{
     font-family:'Fraunces', serif;
@@ -90,7 +96,11 @@
     white-space:nowrap;
     transition:color .4s ease;
   }
-  .nav.solid .nav-logo{color:var(--wood-dark);}
+  .nav.solid .nav-logo
+  {
+     content: url("img/como dos simple oscuro svg.svg");
+     width: 180px;
+  }
 
   .nav-links{
     display:flex;
@@ -108,15 +118,18 @@
   .nav-cta{
     padding:9px 20px;
     border-radius:15px;
-    background:transparent;
-    color:var(--white);
-    border:1px solid var(--white);
+    margin-right:8px;
+    border-radius: 50px;
+    background:var(--wood-mid); color:var(--ink-soft);
     font-size:0.85rem;
     font-weight:500;
     white-space:nowrap;
     transition:background .25s ease, transform .2s ease;
   }
-  .nav-cta:hover{background:var(--ink-soft); color:var(--white); transform:translateY(-1px);}
+  .nav-cta:hover{
+        background:var(--wood-dark);
+    color:var(--ink-soft);
+  }
 
   .nav-burger{
     display:none;
@@ -158,10 +171,10 @@
   }
     .hero::after{
     content:'';
-    position:absolute;
-    backdrop-filter:blur(3px); 
+    position:absolute; 
     inset:0;
-    background:linear-gradient(180deg, rgba(20,13,6,0.7) 0%, rgba(0,0,0,0.6) 50%, rgba(20,13,6,0.7) 100% );
+    backdrop-filter:blur(2px);
+    background:linear-gradient(180deg, rgba(20,13,6,0.3) 0%, rgba(0,0,0,0.6) 50%, rgba(20,13,6,0.9) 100% );
 }
   
   .hero-content{
@@ -200,17 +213,17 @@
   }
   .btn-primary{
     padding:8px 20px;
-    border-radius:15px;
-    background:var(--wood-light);
-    color:var(--ink);
+    border-radius:50px;
+    background:var(--wood-mid);
+    color:var(--ink-soft);
     font-weight:500;
-    font-size:0.95rem;
+    font-size:14px;
     transition:background .25s ease, transform .2s ease;
     display:inline-block;
   }
-  .btn-primary:hover{background:var(--white); transform:translateY(-2px);}
+  .btn-primary:hover{ transform:translateY(-2px);}
   .btn-ghost{
-    padding:8px 20px;
+    padding:10px 20px;
     border-radius:15px;
     border:1px solid rgba(255,255,255,0.5);
     color:var(--white);
@@ -258,7 +271,7 @@
   }
   .section-tag{
     font-size:0.85rem;
-    color:var(--wood-mid);
+    color:var(--ink);
     margin-bottom:14px;
   }
   .section-head{
@@ -302,7 +315,7 @@
     padding:10px 16px;
     border-radius:6px;
     font-size:0.82rem;
-    color:var(--wood-dark);
+    color:var(--ink);
     font-family:'Fraunces', serif;
   }
   .about-text h2{
@@ -368,7 +381,7 @@
     display:flex;
     justify-content:space-between;
     font-size:0.82rem;
-    color:var(--wood-dark);
+    color:var(--ink);
     border-top:1px solid var(--line);
     padding-top:14px;
   }
@@ -481,7 +494,7 @@
   .contact-detail b{
     display:block;
     font-family:'Fraunces', serif;
-    color:var(--wood-dark);
+    color:var(--ink);
     font-weight:440;
     margin-bottom:2px;
   }
@@ -509,9 +522,9 @@
     font-family:'Sora', sans-serif;
     font-size:0.95rem;
     padding:13px 16px;
-    border:1px solid var(--line);
-    border-radius:6px;
-    background:var(--paper);
+    border: 1px solid #7748292f;
+    border-radius:50px;
+    background:transparent;
     color:var(--ink);
     transition:border-color .2s ease, background .2s ease;
   }
@@ -519,8 +532,10 @@
     outline:none;
     border-color:var(--wood-mid);
     background:var(--white);
+        border: 1px solid var(--line);
   }
-  .field textarea{resize:vertical; min-height:100px;}
+  .field textarea{resize:vertical; min-height:100px;
+  padding:20px;}
   .form-submit{
     grid-column:1/-1;
     display:flex;
@@ -529,15 +544,15 @@
     margin-top:6px;
   }
   .btn-send{
-    padding:8px 20px;
-    border-radius:15px;
-    background:var(--wood-dark);
-    color:var(--white);
+    padding:10px 20px;
+    border-radius:50px;
+    background:var(--ink);
+    color:var(--paper);
     font-weight:500;
     font-size:0.95rem;
     transition:background .25s ease, transform .2s ease;
   }
-  .btn-send:hover{background:var(--wood-mid); transform:translateY(-2px);}
+  .btn-send:hover{background:var(--ink-soft); transform:translateY(-2px);}
   .form-status{
     font-size:0.85rem;
     color:var(--wood-mid);
@@ -659,7 +674,7 @@
     <p>Muebles de madera clara pensados para bodas, cumpleaños y encuentros a cielo abierto. Entregamos, armamos y retiramos, en toda Mendoza.</p>
     <div class="hero-actions">
       <a href="#contacto" class="btn-primary">Pedí tu presupuesto</a>
-      <a href="#stock" class="btn-ghost">Ver el stock</a>
+      <!-- <a href="#stock" class="btn-ghost">Ver el stock</a> -->
     </div>
   </div>
   <div class="hero-scroll">
@@ -896,14 +911,16 @@
   <div class="wrap">
     <div class="footer-top">
       <div>
-        <p class="logo">Como Dos Mendoza</p>
-        <p class="foot-desc">Alquiler de sillas y mesas de madera clara para eventos al aire libre en toda Mendoza.</p>
+        <p class="logo">
+        <img style="text-align: center;" src="img/como dos simple blanco svg.svg" alt="Logo Como Dos Mendoza — Alquiler de muebles para eventos al aire libre" width="180">
+        </p>
+        <p class="foot-desc">Alquiler de sillas, mesas, juegos de living y calefacción para eventos al aire libre en toda Mendoza.</p>
       </div>
       <div class="foot-links">
         <div class="foot-col">
           <b>Navegación</b>
           <a href="#nosotros">Nosotros</a>
-          <a href="#stock">Stock</a>
+          <!-- <a href="#stock">Stock</a> -->
           <a href="#galeria">Galería</a>
           <a href="#contacto">Contacto</a>
         </div>
@@ -914,8 +931,8 @@
         </div>
         <div class="foot-col">
           <b>Seguinos</b>
-          <a href="#">Instagram</a>
-          <a href="#">Facebook</a>
+          <a href="https://www.instagram.com/como2mendoza/">Instagram</a>
+          <!-- <a href="https://www.facebook.com/como2mendoza/">Facebook</a> -->
         </div>
       </div>
     </div>
