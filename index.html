@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Como Dos — Alquiler de muebles para eventos</title>
+<title>Como Dos — Alquiler de muebles y calefacción para eventos</title>
 <meta name="description" content="Sillas y mesas de madera clara para eventos al aire libre. Alquiler en Mendoza, con entrega y armado incluido.">
 
 <link rel="icon" type="image/png" href="img/favicon.png" sizes="32x32">
@@ -71,9 +71,18 @@
     padding: 8px;
     border-radius:50px;
     background:rgba(0, 0, 0, 0.18);
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
+    /* backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px); */
     transition:background .4s ease, border-color .4s ease, box-shadow .4s ease, padding .4s ease;
+  }
+  nav::before{
+      content:'';
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  z-index:-1;
   }
   .nav.solid{
     background:rgba(255,255,255,0.7);
@@ -523,7 +532,7 @@
     font-size:0.95rem;
     padding:13px 16px;
     border: 1px solid #7748292f;
-    border-radius:50px;
+    border-radius:30px;
     background:transparent;
     color:var(--ink);
     transition:border-color .2s ease, background .2s ease;
@@ -626,6 +635,9 @@
 
   /* ---------- Responsive ---------- */
   @media (max-width:920px){
+    .hero {
+      padding: 0 4% 4%;
+    }
     .about{grid-template-columns:1fr; gap:40px;}
     .stock-grid{grid-template-columns:repeat(2,1fr);}
     .contact{grid-template-columns:1fr; gap:50px;}
@@ -633,6 +645,7 @@
     .g-span2{grid-column:span 2; grid-row:span 1;}
   }
   @media (max-width:680px){
+    .hero {padding:0 6% 6%;}
     .nav-links{display:none;}
     .nav-burger{display:flex; position:relative;}
     .nav-cta{display:none;}
@@ -642,6 +655,52 @@
     .gallery-grid{grid-template-columns:repeat(2,1fr); grid-auto-rows:150px;}
     .footer-top{flex-direction:column;}
   }
+  /* ===== Menú hamburguesa mobile ===== */
+/* Ícono → X */
+.nav-burger span,
+.nav-burger::before,
+.nav-burger::after{
+  left:50%;
+  transform:translateX(-50%);
+  transition:transform .3s ease, opacity .2s ease, top .3s ease;
+}
+.nav-burger::before{ top:13px; }
+.nav-burger span{ top:17px; }
+.nav-burger::after{ top:21px; }
+
+.nav.open .nav-burger::before{ top:17px; transform:translateX(-50%) rotate(45deg); }
+.nav.open .nav-burger::after{ top:17px; transform:translateX(-50%) rotate(-45deg); }
+.nav.open .nav-burger span{ opacity:0; }
+
+@media (max-width:680px){
+  /* Panel desplegable (reutiliza los links existentes) */
+  .nav-links{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    position:absolute;
+    top:calc(100% + 10px);
+    left:0;
+    right:0;
+    padding:16px 22px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 8px 24px -8px;
+    /* estado cerrado */
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-8px);
+    transition:opacity .3s ease, transform .3s ease, visibility .3s ease;
+  }
+  .nav.open .nav-links{ opacity:1; visibility:visible;
+     /* transform:translateY(0); */
+     align-items:start; 
+    background:rgba(255,255,255,0.7); 
+}
+  .nav-links a{ color:var(--ink); font-size:1rem; padding:8px 4px; }
+}
 </style>
 </head>
 <body>
@@ -669,7 +728,7 @@
     <!-- Reemplazar por un video propio de mesas y sillas armadas en un evento al aire libre -->
   </video>
   <div class="hero-content">
-    <p class="hero-eyebrow">Alquiler de sillas y mesas para eventos al aire libre</p>
+    <p class="hero-eyebrow">Alquiler de sillas, mesas juegos de living y calefacción para eventos al aire libre</p>
     <h1>Vistiendo eventos debajo del cielo mendocino</h1>
     <p>Muebles de madera clara pensados para bodas, cumpleaños y encuentros a cielo abierto. Entregamos, armamos y retiramos, en toda Mendoza.</p>
     <div class="hero-actions">
@@ -898,6 +957,7 @@
         <label for="mensaje">Contanos más</label>
         <textarea id="mensaje" name="mensaje" placeholder="Lugar, cantidad de mesas y sillas que estás pensando, horario del evento..."></textarea>
       </div>
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
       <div class="form-submit">
         <button type="submit" class="btn-send">Enviar consulta</button>
         <span class="form-status" id="formStatus"></span>
@@ -952,10 +1012,23 @@
     else{ nav.classList.remove('solid'); }
   });
 
-  // Mobile burger -> smooth scroll to contact as simple fallback
-  document.querySelector('.nav-burger').addEventListener('click', () => {
-    document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
-  });
+ // Menú hamburguesa mobile
+const burger = document.querySelector('.nav-burger');
+burger.addEventListener('click', () => {
+  nav.classList.toggle('open');
+});
+
+// Cerrar al tocar un link
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => nav.classList.remove('open'));
+});
+
+// Cerrar al tocar fuera del menú
+document.addEventListener('click', (e) => {
+  if(nav.classList.contains('open') && !nav.contains(e.target)){
+    nav.classList.remove('open');
+  }
+});
 
   // Reveal on scroll
   const revealEls = document.querySelectorAll('.reveal');
@@ -1007,15 +1080,47 @@
     if(e.key === 'Escape') closeLightbox();
   });
 
-  // Contact form (front-end only demo)
-  const form = document.getElementById('contactForm');
-  const status = document.getElementById('formStatus');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    status.textContent = 'Recibimos tu consulta. Te contactamos a la brevedad.';
-    form.reset();
-    // Para producción: reemplazar por integración con backend, servicio de email o WhatsApp API.
-  });
+// Contact form — Web3Forms
+const WEB3FORMS_ACCESS_KEY = "7a27b30e-2069-4352-aa5a-d534af294cdd";
+
+const form = document.getElementById('contactForm');
+const status = document.getElementById('formStatus');
+const submitBtn = form.querySelector('.btn-send');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  status.style.color = '';
+  status.textContent = 'Enviando...';
+  submitBtn.disabled = true;
+
+  const formData = new FormData(form);
+  formData.append('access_key', WEB3FORMS_ACCESS_KEY);
+  formData.append('subject', 'Nueva consulta desde la web — Como Dos');
+  formData.append('from_name', 'Web Como Dos Mendoza');
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: formData
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      status.textContent = 'Recibimos tu consulta. Te contactamos a la brevedad.';
+      form.reset();
+    } else {
+      status.style.color = '#b23b3b';
+      status.textContent = 'Hubo un problema al enviar. Escribinos por WhatsApp.';
+    }
+  } catch (err) {
+    status.style.color = '#b23b3b';
+    status.textContent = 'No pudimos enviar. Probá de nuevo o escribinos por WhatsApp.';
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
 </script>
 
 </body>
