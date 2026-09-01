@@ -1115,11 +1115,11 @@ form.addEventListener('submit', async (e) => {
       status.textContent = 'Recibimos tu consulta. Te contactamos a la brevedad.';
       form.reset();
     } else {
-      status.style.color = '#b23b3b';
+      status.style.color = '#584838';
       status.textContent = 'Hubo un problema al enviar. Escribinos por WhatsApp.';
     }
   } catch (err) {
-    status.style.color = '#b23b3b';
+    status.style.color = '#584838';
     status.textContent = 'No pudimos enviar. Probá de nuevo o escribinos por WhatsApp.';
   } finally {
     submitBtn.disabled = false;
