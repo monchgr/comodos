@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Como Dos — Alquiler de muebles y calefacción para eventos</title>
+<title>Como Dos — Alquiler de muebles y calefacción para eventos en Mendoza</title>
 <meta name="description" content="Sillas y mesas de madera clara para eventos al aire libre. Alquiler en Mendoza, con entrega y armado incluido.">
 
 <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
@@ -73,7 +73,7 @@
     align-items:center;
     justify-content:space-between;
     justify-self:center;
-    padding: 8px;
+    padding: 8px 22px;
     border-radius:50px;
     background:rgba(0, 0, 0, 0.18);
     /* backdrop-filter:blur(14px);
@@ -131,8 +131,6 @@
 
   .nav-cta{
     padding:9px 20px;
-    border-radius:15px;
-    margin-right:8px;
     border-radius: 50px;
     background:var(--wood-mid); color:var(--ink-soft);
     font-size:0.85rem;
@@ -407,7 +405,7 @@
   }
 
   /* ---------- Gallery ---------- */
-  #galeria {
+  /* #galeria {
     background: var(--paper);
   } 
   .gallery-grid{
@@ -448,7 +446,7 @@
   .g-span2{grid-column:span 2; grid-row:span 2;}
 
   /* Lightbox */
-  .lightbox{
+  /* .lightbox{
     position:fixed;
     inset:0;
     background:rgba(20,14,8,0.92);
@@ -480,8 +478,129 @@
     font-size:1.4rem;
     display:flex;align-items:center;justify-content:center;
   }
-  .lightbox-close:hover{background:rgba(255,255,255,0.22);}
+  .lightbox-close:hover{background:rgba(255,255,255,0.22);} */ 
 
+
+/* ===== Carrusel (flexbox ) ===== */
+.carousel-wrap {
+  --gap: 60px;
+  --item-w: clamp(120px, 20vw, 260px);
+  --item-h: clamp(120px, 18vw, 260px);
+  --center-scale: 1.35;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 5em 0;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  will-change: transform;
+  width: calc(var(--item-w) * 3 + var(--gap) * 2);
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+  width: var(--item-w);
+  height: var(--item-h);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  transform: scale(.95);
+  opacity: .75;
+  filter: brightness(.8);
+   transition: transform .6s cubic-bezier(.4,0,.2,1),
+              opacity .6s ease,
+              filter .6s ease;
+}
+
+.carousel-item img,
+.carousel-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-item.center {
+  transform: scale(var(--center-scale));
+  opacity: 1;
+  filter: none;
+  z-index: 3;
+}
+
+
+.car-btn {
+  color: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 5;
+  transition: background .2s, transform .2s;
+}
+.car-btn:active { transform: scale(.95); }
+
+/* Tablet */
+@media (max-width: 768px) {
+  .carousel-wrap {
+    --item-w: clamp(90px, 24vw, 180px);
+    --item-h: clamp(90px, 22vw, 180px);
+    --center-scale: 1.3;
+    gap: 8px;
+    padding: 24px 0;
+  }
+}
+
+/* Mobile: los extremos casi desaparecen, foco en el centro */
+@media (max-width: 480px) {
+  .carousel-wrap {
+    --item-w: clamp(70px, 26vw, 140px);
+    --item-h: clamp(70px, 26vw, 140px);
+    --gap: 8px;
+    --center-scale: 1.5;
+  }
+}
+
+/* ===== Lightbox (igual que antes) ===== */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .9);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox.open { display: flex; }
+.lightbox-content { max-width: 90vw; max-height: 90vh; }
+.lightbox-content img,
+.lightbox-content video {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  display: block;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 40px;
+  cursor: pointer;
+  line-height: 1;
+}
   /* ---------- Contact ---------- */
   .contact{
     display:grid;
@@ -626,7 +745,12 @@
     flex-wrap:wrap;
     gap:10px;
   }
-
+  footer a i{
+    transition:transform .3s ease;
+  }
+  footer a i:hover{
+    transform:translateY(-2px);
+  }
   /* ---------- Reveal on scroll (single orchestrated pattern) ---------- */
   .reveal{
     opacity:0;
@@ -864,7 +988,7 @@
 -->
 
 <!-- ================= GALERÍA ================= -->
-<section id="galeria">
+<section id="galeria-carrusel">
   <div class="wrap">
     <div class="section-head reveal">
       <div>
@@ -874,55 +998,23 @@
       <p>Fotos y videos reales de bodas, cumpleaños y encuentros que armamos este último año.</p>
     </div>
 
-    <div class="gallery-grid reveal">
-      <div class="gallery-item g-span2" data-type="image">
-        <img src="img/img 114.jpeg" alt="Mesa larga armada en viñedo">
-      </div>
-      <div class="gallery-item" data-type="image" >
-        <img src="img/img 2.jpeg" alt="Mesa larga armada en viñedo">
-      </div>
-             <div class="gallery-item" data-type="video" >
-        <video src="videos/video 2.mp4" autoplay muted></video>
-      </div>
-      <div class="gallery-item" data-type="image" >
-        <img src="img/img 4.jpeg" alt="Sillas de madera clara para boda al aire libre">
-      </div>
-      <div class="gallery-item" data-type="image" >
-        <img src="img/img 7.jpeg" alt="Ceremonia al aire libre con sillas de madera">
-      </div>
-             <div class="gallery-item" data-type="video" >
-        <video src="videos/video3.mp4" autoplay muted></video>
-      </div>
-      <div class="gallery-item" data-type="image" >
-        <img src="img/img 8.jpeg" alt="Mesa dulce con mantel en evento de campo">
-      </div>
-      <div class="gallery-item g-span2" data-type="image" >
-        <img src="img/img 9.jpeg" alt="Mesas comunales dispuestas para banquete de boda">
-      </div>
-      <div class="gallery-item" data-type="image" >
-        <img src="img/img 10.jpeg" alt="Detalle de silla de madera con flores">
-      </div>
-      <div class="gallery-item" data-type="image" >
-        <img src="img/img 12.jpeg" alt="Detalle de silla de madera con flores">
-      </div>
-        <div class="gallery-item" data-type="image" >
-        <img src="img/img 13.jpeg" alt="Detalle de silla de madera con flores">
-      </div>
-        <div class="gallery-item" data-type="image" >
-        <img src="img/img 15.jpeg" alt="Detalle de silla de madera con flores">
-      </div>
-             <div class="gallery-item" data-type="video" >
-        <video src="videos/video 1.mp4" autoplay muted></video>
-      </div>
-  
+    <div class="carousel-wrap reveal">
+      <button class="car-btn prev" aria-label="Anterior">
+        <i class="fa-solid fa-chevron-left fa-2xl" style="color: #584838;"></i>
+      </button>´
+
+      <div class="carousel-track" id="carouselTrack"></div>
+
+      <button class="car-btn next" aria-label="Siguiente">
+        <i class="fa-solid fa-chevron-right fa-2xl" style="color: #584838;"></i>
+      </button>
     </div>
   </div>
 </section>
 
-<!-- Lightbox -->
 <div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose">×</button>
-  <div class="lightbox-inner" id="lightboxInner"></div>
+  <span class="lightbox-close" id="lightboxClose">&times;</span>
+  <div class="lightbox-content" id="lightboxContent"></div>
 </div>
 
 <!-- ================= CONTACTO ================= -->
@@ -1007,10 +1099,19 @@
           <a href="tel:+5492616255783">+54 9 261 625-5783</a>
           <a href="mailto:como2eventos@gmail.com">como2eventos@gmail.com</a>
         </div>
-        <div class="foot-col">
+        <div class="foot-col" >
+
           <b>Seguinos</b>
-          <a href="https://www.instagram.com/como2mendoza/">Instagram</a>
-          <!-- <a href="https://www.facebook.com/como2mendoza/">Facebook</a> -->
+          <div style="display:flex; flex-direction:row; gap:10px;">
+          <a href="https://www.instagram.com/como2mendoza/">
+            <i class="fa-brands fa-instagram fa-xl" style="color: #F6007F;"></i>
+          </a>
+
+            <a href="https://www.instagram.com/como2mendoza/">
+            <i class="fa-brands fa-facebook fa-xl" style="color: #2979fb;"></i>
+          </a>
+          </div>
+ 
         </div>
       </div>
     </div>
@@ -1020,7 +1121,7 @@
     </div>
   </div>
 </footer>
-
+<script src="https://kit.fontawesome.com/b8f8edcb52.js" crossorigin="anonymous"></script>
 <script>
     document.querySelector('.hero-video').playbackRate = 0.5;
   // Nav solid background on scroll
@@ -1061,46 +1162,206 @@ document.addEventListener('click', (e) => {
   revealEls.forEach(el => io.observe(el));
 
   // Gallery lightbox
-  const lightbox = document.getElementById('lightbox');
-  const lightboxInner = document.getElementById('lightboxInner');
-  const lightboxClose = document.getElementById('lightboxClose');
+//   const lightbox = document.getElementById('lightbox');
+//   const lightboxInner = document.getElementById('lightboxInner');
+//   const lightboxClose = document.getElementById('lightboxClose');
 
- document.querySelectorAll('.gallery-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const type = item.dataset.type;
-    lightboxInner.innerHTML = '';
+//  document.querySelectorAll('.gallery-item').forEach(item => {
+//   item.addEventListener('click', () => {
+//     const type = item.dataset.type;
+//     lightboxInner.innerHTML = '';
 
-    if(type === 'video'){
-      const source = item.querySelector('video');
-      const v = document.createElement('video');
-      v.src = source.getAttribute('src') || source.querySelector('source')?.src;
-      v.controls = true;
-      v.autoplay = true;
-      v.loop = true;
-      lightboxInner.appendChild(v);
+//     if(type === 'video'){
+//       const source = item.querySelector('video');
+//       const v = document.createElement('video');
+//       v.src = source.getAttribute('src') || source.querySelector('source')?.src;
+//       v.controls = true;
+//       v.autoplay = true;
+//       v.loop = true;
+//       lightboxInner.appendChild(v);
+//     } else {
+//       const source = item.querySelector('img');
+//       const img = document.createElement('img');
+//       img.src = source.src;          // toma la ruta de la imagen que ya está en el item
+//       img.alt = source.alt || '';
+//       lightboxInner.appendChild(img);
+//     }
+
+//     lightbox.classList.add('active');
+//   });
+// });
+
+//   function closeLightbox(){
+//     lightbox.classList.remove('active');
+//     lightboxInner.innerHTML = '';
+//   }
+//   lightboxClose.addEventListener('click', closeLightbox);
+//   lightbox.addEventListener('click', (e) => {
+//     if(e.target === lightbox) closeLightbox();
+//   });
+//   document.addEventListener('keydown', (e) => {
+//     if(e.key === 'Escape') closeLightbox();
+//   });
+// Lista de items: (imágenes y videos)
+const items = [
+  { type: "image", src: "img/img 114.jpeg", alt: "Mesa larga armada en viñedo" },
+  { type: "image", src: "img/img 2.jpeg",   alt: "Mesa larga armada en viñedo" },
+  { type: "video", src: "videos/video 2.mp4" },
+  { type: "image", src: "img/img 4.jpeg",   alt: "Sillas de madera clara para boda al aire libre" },
+  { type: "image", src: "img/img 7.jpeg",   alt: "Ceremonia al aire libre con sillas de madera" },
+  { type: "video", src: "videos/video3.mp4" },
+  { type: "image", src: "img/img 8.jpeg",   alt: "Mesa dulce con mantel en evento de campo" },
+  { type: "image", src: "img/img 9.jpeg",   alt: "Mesas comunales dispuestas para banquete de boda" },
+  { type: "image", src: "img/img 10.jpeg",  alt: "Detalle de silla de madera con flores" },
+  { type: "image", src: "img/img 12.jpeg",  alt: "Detalle de silla de madera con flores" },
+  { type: "image", src: "img/img 13.jpeg",  alt: "Detalle de silla de madera con flores" },
+  { type: "image", src: "img/img 15.jpeg",  alt: "Detalle de silla de madera con flores" },
+  { type: "video", src: "videos/video 1.mp4" },
+];
+
+const track = document.getElementById("carouselTrack");
+const wrapEl = document.querySelector(".carousel-wrap");
+const lightbox = document.getElementById("lightbox");
+const lightboxContent = document.getElementById("lightboxContent");
+const lightboxClose = document.getElementById("lightboxClose");
+
+let currentIndex = 0;
+let isAnimating = false;
+let autoplayTimer = null;
+
+function mediaTag(item) {
+  return item.type === "video"
+    ? `<video src="${item.src}" autoplay muted loop playsinline></video>`
+    : `<img src="${item.src}" alt="${item.alt || ""}">`;
+}
+
+function itemStep() {
+  // offsetWidth NO se ve afectado por transform:scale, así que da
+  // el mismo valor sin importar si el item es prev/center/next.
+  const first = track.querySelector(".carousel-item");
+  const gap = parseFloat(getComputedStyle(track).gap) || 0;
+  return first.offsetWidth + gap;
+}
+
+
+function createItemEl(idx, cls) {
+  const item = items[idx];
+  const el = document.createElement("div");
+  el.className = `carousel-item ${cls}`;
+  el.innerHTML = mediaTag(item);
+  el.addEventListener("click", () => openLightbox(idx));
+  return el;
+}
+
+function buildInitial() {
+  track.innerHTML = "";
+  const total = items.length;
+  const prevIdx = (currentIndex - 1 + total) % total;
+  const nextIdx = (currentIndex + 1) % total;
+  track.appendChild(createItemEl(prevIdx, "prev"));
+  track.appendChild(createItemEl(currentIndex, "center"));
+  track.appendChild(createItemEl(nextIdx, "next"));
+}
+
+function slide(direction) {
+  if (isAnimating) return;
+  isAnimating = true;
+
+  const total = items.length;
+
+  if (direction === 1) {
+    // Agregamos el próximo ítem que va a entrar (ya con su tamaño final "next")
+    const newNextIdx = (currentIndex + 2) % total;
+    track.appendChild(createItemEl(newNextIdx, "next"));
+
+    const step = itemStep();
+
+    // Reasignamos clases YA, para que el achique/agrande arranque
+    // en el mismo instante que el desplazamiento lateral
+    const children = [...track.children];
+    children[1].className = "carousel-item prev";    // el centro se achica
+    children[2].className = "carousel-item center";  // el next se agranda
+
+    track.style.transition = "transform .6s cubic-bezier(.4,0,.2,1)";
+    track.style.transform = `translateX(${-step}px)`;
+  } else {
+    // Insertamos el ítem que va a entrar por la izquierda
+    const newPrevIdx = (currentIndex - 2 + total) % total;
+    track.insertBefore(createItemEl(newPrevIdx, "prev"), track.firstChild);
+
+    const step = itemStep();
+
+    // Lo "escondemos" instantáneamente corriendo el track hacia la izquierda
+    track.style.transition = "none";
+    track.style.transform = `translateX(${-step}px)`;
+    void track.offsetWidth; // fuerza reflow para fijar ese estado
+
+    // Reasignamos clases YA, antes de animar la vuelta
+    const children = [...track.children];
+    children[1].className = "carousel-item center"; // el prev se agranda
+    children[2].className = "carousel-item next";    // el centro se achica
+
+    track.style.transition = "transform .6s cubic-bezier(.4,0,.2,1)";
+    track.style.transform = "translateX(0px)";
+  }
+
+  track.addEventListener("transitionend", function onEnd() {
+    track.removeEventListener("transitionend", onEnd);
+    currentIndex = (currentIndex + direction + total) % total;
+
+    if (direction === 1) {
+      track.removeChild(track.firstChild); // sacamos el que quedó afuera a la izquierda
     } else {
-      const source = item.querySelector('img');
-      const img = document.createElement('img');
-      img.src = source.src;          // toma la ruta de la imagen que ya está en el item
-      img.alt = source.alt || '';
-      lightboxInner.appendChild(img);
+      track.removeChild(track.lastChild);  // sacamos el que quedó afuera a la derecha
     }
 
-    lightbox.classList.add('active');
-  });
-});
+    track.style.transition = "none";
+    track.style.transform = "translateX(0px)";
+    void track.offsetWidth;
 
-  function closeLightbox(){
-    lightbox.classList.remove('active');
-    lightboxInner.innerHTML = '';
-  }
-  lightboxClose.addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', (e) => {
-    if(e.target === lightbox) closeLightbox();
-  });
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape') closeLightbox();
-  });
+    isAnimating = false;
+  }, { once: true });
+}
+
+function goNext() { slide(1); }
+function goPrev() { slide(-1); }
+
+function startAutoplay() {
+  stopAutoplay();
+  autoplayTimer = setInterval(goNext, 4000);
+}
+function stopAutoplay() {
+  if (autoplayTimer) clearInterval(autoplayTimer);
+}
+
+function openLightbox(idx) {
+  const item = items[idx];
+  lightboxContent.innerHTML =
+    item.type === "video"
+      ? `<video src="${item.src}" controls autoplay></video>`
+      : `<img src="${item.src}" alt="${item.alt || ""}">`;
+  lightbox.classList.add("open");
+  stopAutoplay();
+}
+function closeLightbox() {
+  lightbox.classList.remove("open");
+  lightboxContent.innerHTML = "";
+  startAutoplay();
+}
+
+document.querySelector(".car-btn.next").addEventListener("click", () => { goNext(); startAutoplay(); });
+document.querySelector(".car-btn.prev").addEventListener("click", () => { goPrev(); startAutoplay(); });
+
+lightboxClose.addEventListener("click", closeLightbox);
+lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
+
+wrapEl.addEventListener("mouseenter", stopAutoplay);
+wrapEl.addEventListener("mouseleave", startAutoplay);
+
+// Inicialización — al final, después de que todo esté definido
+buildInitial();
+startAutoplay();
 
 // Contact form — Web3Forms
 const WEB3FORMS_ACCESS_KEY = "7a27b30e-2069-4352-aa5a-d534af294cdd";
