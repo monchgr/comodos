@@ -1,0 +1,17 @@
+{
+  "name": "comodos",
+  "version": "1.0.0",
+  "description": "Alquiler de muebles y calefacción para eventos",
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site - no build required'",
+    "lint": "echo 'No linter configured for static HTML'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
